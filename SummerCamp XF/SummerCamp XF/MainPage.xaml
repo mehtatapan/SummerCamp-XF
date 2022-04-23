@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SummerCamp_XF.MainPage"
+             Title="List of Campers">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="btnAdd" Text="+" Clicked="btnAdd_Clicked" IconImageSource="plus.png"  />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" 
+            iOS="0, 20, 0, 0" Default="10,40,10,10"
+            Android="0, 0, 0, 0" />
+    </ContentPage.Padding>
+
+    <StackLayout>
+        <ScrollView x:Name="ArtworkScrollView" Orientation="Vertical" VerticalOptions="FillAndExpand" >
+            <Grid RowSpacing="20" ColumnSpacing="20" Padding="20,20,20,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout x:Name="TitlePanel" Grid.Row="0" Padding="20,20,20,0">
+                    <Picker x:Name="ddlCompounds" Title="Filter Campers by Compound" class="Compound" Style="{StaticResource editEntry}" ItemDisplayBinding="{Binding Name}" SelectedIndexChanged="ddlCompounds_SelectedIndexChanged">
+                    </Picker>
+                </StackLayout>
+                <ListView x:Name="camperList" Grid.Row="1" Margin="30,0,30,0" ItemSelected="ArtworkSelected" ItemsSource="{Binding Camper}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding FullName}" Detail="{Binding FormalName}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ScrollView>
+    </StackLayout>
+
+</ContentPage>
